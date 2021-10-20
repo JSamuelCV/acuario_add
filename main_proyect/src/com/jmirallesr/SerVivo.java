@@ -1,4 +1,4 @@
-package com.company;
+package com.jmirallesr;
 
 public class SerVivo {
     private String id,especie,genero,fechaCompra,procedencia,comportamiento,estado,alimentacion,idSimbiosis,tratamiento;
@@ -17,7 +17,7 @@ public class SerVivo {
 
     }
 
-    public void comprobacion(){
+    static void comprobacion(){
 
     }
 
