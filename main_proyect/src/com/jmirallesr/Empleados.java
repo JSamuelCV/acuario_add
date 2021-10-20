@@ -1,5 +1,5 @@
 package com.jmirallesr;
-import java.io.IOException;
+import java.io.*;
 /*
         En el metodo main se pondra a disposicion del usuario un menu en el que se le
         daran las siguientes opciones:
@@ -20,8 +20,12 @@ import java.io.IOException;
 
 public class Empleados {
     public static void main(String[]args) throws IOException {
+        RandomAccessFile ficheroEmpleados = new RandomAccessFile("C:\\ficheroEmpleados.txt", "rw");
+        FileWriter escritor = new FileWriter("C:\\ficheroEmpleados.txt");
+        BufferedWriter bw = new BufferedWriter(escritor);
+        FileReader lector = new FileReader("C:\\ficheroEmpleados.txt");
+        BufferedReader br = new BufferedReader(lector);
         Teclado entrada=new Teclado();
-        Menus menu=new Menus();
         boolean fin=false;
         int opcionMenuEmpleados;
         do{
@@ -30,7 +34,7 @@ public class Empleados {
                 case 0 -> fin=true;
                 case 1 -> consultas(entrada);
                 case 2 -> cambiarDatosEmpleado(entrada);
-                case 3 -> anadirEmpleado(entrada);
+                case 3 -> anadirEmpleado(entrada, ficheroEmpleados, escritor, bw);
                 case 4 -> eliminarEmpleado(entrada);
             }
         }while (!fin);
@@ -61,7 +65,7 @@ public class Empleados {
             System.out.println();
             System.out.println("Introduza el ID del empleado en el que se aplicaran los cambios (0 para regresar al menu principal): ");
             numeroEmpleado= entrada.leerInt();
-        }while(numeroEmpleado==Integer.MIN_VALUE || numeroEmpleado<0/*|| el empleado no existe*/);
+        }while(numeroEmpleado<0/*|| el empleado no existe*/);
 
         // En caso de que el empleado exista se le pregunta al usuario lo que desea cambiar
         do{
@@ -73,7 +77,13 @@ public class Empleados {
 
     }
 
-    static void anadirEmpleado(Teclado entrada){
+    static void anadirEmpleado(Teclado entrada, RandomAccessFile ficheroEmpleados, FileWriter escritor, BufferedWriter bw) throws IOException{
+        ficheroEmpleados.seek(ficheroEmpleados.length());
+        bw.newLine();
+        boolean fin=false;
+        String nombreApellidos, tipoTrabajo, dni, valoracion, vacaciones;
+        int id/*va a ser un contador*/, horasTrabajo, sueldo;
+
 
     }
 
