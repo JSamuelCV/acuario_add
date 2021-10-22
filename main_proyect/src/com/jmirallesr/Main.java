@@ -14,6 +14,64 @@ public class Main {
 
 
 
+    //Empleados
+    /*
+        En el metodo main se pondra a disposicion del usuario un menu en el que se le
+        daran las siguientes opciones:
+
+            - Listar empleados : En este metodo se mostraran los empleados del acuario
+
+            - Cambiar datos empleado : Añadir empleado/Eliminar empleado/Cambiar datos de un empleado
+
+     */
+    static void menuPrincipalEmpleados() throws IOException{
+        final String rutaEmpleados="C:\\ficheroEmpleados.txt";
+        File archivoEmpleados = new File (rutaEmpleados);
+        FileReader lector = new FileReader (rutaEmpleados);
+        BufferedReader br = new BufferedReader(lector);
+        Teclado entrada=new Teclado();
+        boolean fin=false;
+        int opcionMenuEmpleados;
+        do{
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("MENU EMPLEADOS");
+            System.out.println();
+            System.out.println("1- Listar empleados");
+            System.out.println("2- Cambiar datos de un empleado");
+            System.out.println();
+            do{
+                System.out.println("Seleccione una opcion (0 para terminar) : ");
+                opcionMenuEmpleados=entrada.leerInt();
+            }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>4);
+
+            switch (opcionMenuEmpleados){
+                case 0 -> fin=true;
+                case 1 -> lista(archivoEmpleados, br, lector);
+                case 2 -> cambiarDatosEmpleado(rutaEmpleados);
+            }
+        }while(!fin);
+    }
+
+    static void lista(File archivoEmpleados, BufferedReader br, FileReader lector) throws IOException{
+        int i;
+        String linea;
+        for(i=1;i<archivoEmpleados.length();i++){
+            linea=br.readLine();
+            System.out.println();
+            System.out.println("Empleado "+i+" : "+linea);
+            System.out.println();
+        }
+    }
+
+    static void cambiarDatosEmpleado(String rutaEmpleados){
+        System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleados);
+    }
+
+
+
+
     //SerVivo
     static void menuPrincipalSerVivo() throws IOException {
         Teclado t = new Teclado();
