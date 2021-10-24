@@ -4,9 +4,10 @@ import java.io.*;
 
 public class Main {
 
-    static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/e.txt";;
+    static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.txt";;
 
     public static void main(String[] args) {
+        comprobarArchivoSeresVivos();
     }
 
 
@@ -122,18 +123,58 @@ public class Main {
     static void infoAltasSerVivo(){
         System.out.println("Para realizar altas,bajas o modificaciones de algun ser vivo," +
                 "debes acceder al archivo (" + rutaSeresVivos + ") ");
+        System.out.println(" ");
+        System.out.println("Debes seguir la siguiente estructura dentro del archivo para que los datos se guarden correctamente:\n" +
+                "\tID (Ejemplo: a002)\n" +
+                "\tEspecie (Ejemplo: Amphiprion akallopisos)\n" +
+                "\tGenero (Macho/Hembra/Hermafrodita/Hermafrodita(Hembra)/Hermafrodita(Macho)\n" +
+                "\tFecha compra (Ejemplo: 13/06/2009)\n" +
+                "\tProcedencia (Ejemplo: tumundomarino.com)\n" +
+                "\tComportamiento (Ejemplo: Tranquilo)\n" +
+                "\tEstado (Normal/Enfermo/Gestación)\n" +
+                "\tTratamiento (Ejemplo: CUPRACURE)\n" +
+                "\tAlimentacion (Ejemplo: ARTEMIA ADULTA ENRIQUECIDA 10)\n" +
+                "\tSimbiosis (True/False)\n" +
+                "\tID Simbiosis (Ejemplo: a001)");
+        System.out.println("Tratamiento e ID Simbiosis solo se utilizarán cuando el estado sea 'enfermo' o Simbiosis sea 'True'");
+    }
+
+    static int comprobarVacio(){
+        String linea="";
+        int cont = 0;
+        try {
+            BufferedReader in=new BufferedReader(new FileReader(rutaSeresVivos));
+            while((linea = in.readLine())!=null) {
+                cont++;
+            }
+            in.close();
+        }catch(IOException ioe) {}
+        return cont;
     }
 
     static void comprobarArchivoSeresVivos(){
         try {
-            BufferedWriter out=new BufferedWriter(new FileWriter(rutaSeresVivos,false));
-            out.write("Ejemplo1");
-            out.newLine();
-            out.write("Ejemplo2");
-            out.newLine();
-            out.write("Ejemplo3");
-            out.newLine();
-            out.close();
+            if(comprobarVacio()==0) {
+                BufferedWriter out = new BufferedWriter(new FileWriter(rutaSeresVivos, false));
+                out.write("a001");
+                out.newLine();
+                out.write("Amphiprion akallopisos");
+                out.newLine();
+                out.write("Macho");
+                out.newLine();
+                out.write("13/06/2009");
+                out.newLine();
+                out.write("tumundomarino.com");
+                out.newLine();
+                out.write("Tranquilo");
+                out.newLine();
+                out.write("Normal");
+                out.newLine();
+                out.write("ARTEMIA ADULTA ENRIQUECIDA 10");
+                out.newLine();
+                out.write("False");
+                out.close();
+            }
         }catch(IOException ioe) {}
     }
 }
