@@ -73,7 +73,7 @@ public class Main {
 
 
 
-    //SerVivo
+        //SerVivo
     static void menuPrincipalSerVivo() throws IOException {
         Teclado t = new Teclado();
         int op = 0;
@@ -89,7 +89,7 @@ public class Main {
 
         switch(op){
             case 1:
-                consultasSerVivo();
+                menuConsultasSerVivo();
                 break;
             case 2:
                 listadosSerVivo();
@@ -104,8 +104,105 @@ public class Main {
         }
     }
 
-    static void consultasSerVivo(){
+    static void menuConsultasSerVivo() throws IOException {
+        Teclado t = new Teclado();
+        int op = 0;
+        String valor = "";
+        System.out.println("\n\tCONSULTAS SERES VIVOS\n\t====\n");
+        System.out.println("1.- Por ID.");
+        System.out.println("2.- Por especie.");
+        System.out.println("3.- Por genero.");
+        System.out.println("4.- Por fecha de compra.");
+        System.out.println("5.- Por procedencia.");
+        System.out.println("6.- Por estado.");
+        System.out.println("7.- Por alimentacion.");
+        System.out.println("8.- Volver.\n");
+        do {
+            System.out.print("\tTeclee opción ? ");
+            op = t.leerInt();
+        }while(op<1||op>8);
+        if(op==8){
+            menuPrincipalSerVivo();
+        }else{
+            System.out.print("\tTeclee valor a buscar ? ");
+            valor = t.leerString();
+            consultasSerVivo(op,valor);
+        }
+    }
 
+    static void consultasSerVivo(int op,String valor) {
+        int lineas=9;
+        try{
+            BufferedReader in=new BufferedReader(new FileReader(rutaSeresVivos));
+            SerVivo serVivo = new SerVivo();
+            switch (op){
+                case 1:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getId().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+                case 2:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getEspecie().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+                case 3:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getGenero().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+                case 4:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getFechaCompra().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+                case 5:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getProcedencia().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+                case 6:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getEstado().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+                case 7:
+                    for(int i=0;i<comprobarLineas();i+=lineas){
+                        lineas=9;
+                        lineas=serVivo.leerDatos(in);
+                        if(serVivo.getAlimentacion().equalsIgnoreCase(valor)){
+                            serVivo.mostrarDatos();
+                        }
+                    }
+                    break;
+            }
+            in.close();
+            menuConsultasSerVivo();
+        }catch(IOException ioe) {}
     }
 
     static void listadosSerVivo(){
