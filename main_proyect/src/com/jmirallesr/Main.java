@@ -109,14 +109,17 @@ public class Main {
     }
 
     static void listadosSerVivo(){
-        //TEST DE METODOS
-        String linea="";
+        int lineas=9;
         try {
             BufferedReader in=new BufferedReader(new FileReader(rutaSeresVivos));
-            while((linea = in.readLine())!=null) {
-                System.out.println(linea);
+            SerVivo serVivo = new SerVivo();
+            for(int i=0;i<comprobarLineas();i+=lineas){
+                lineas=9;
+                lineas=serVivo.leerDatos(in);
+                serVivo.mostrarDatos();
             }
             in.close();
+            menuPrincipalSerVivo();
         }catch(IOException ioe) {}
     }
 
@@ -139,7 +142,7 @@ public class Main {
         System.out.println("Tratamiento e ID Simbiosis solo se utilizarán cuando el estado sea 'enfermo' o Simbiosis sea 'True'");
     }
 
-    static int comprobarVacio(){
+    static int comprobarLineas(){
         String linea="";
         int cont = 0;
         try {
@@ -154,7 +157,7 @@ public class Main {
 
     static void comprobarArchivoSeresVivos(){
         try {
-            if(comprobarVacio()==0) {
+            if(comprobarLineas()==0) {
                 BufferedWriter out = new BufferedWriter(new FileWriter(rutaSeresVivos, false));
                 out.write("a001");
                 out.newLine();
@@ -178,3 +181,4 @@ public class Main {
         }catch(IOException ioe) {}
     }
 }
+
