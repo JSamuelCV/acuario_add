@@ -57,16 +57,16 @@ public class Main {
                     +"3. Mostrar caja\n"
                     +"SALIR --> Pulse cualquier otro número\n"
             );
-            switch (Read.dataInt()) {
+            switch (Read.readInt()) {
                 case 1:
                     gestion.mostrarProductos(catalogo);
                     break;
                 case 2:
                     System.out.println("¿Que producto desea comprar?");
                     gestion.mostrarNombreProductos(catalogo);
-                    lecturaProducto=Read.dataInt();
+                    lecturaProducto=Read.readInt();
                     System.out.println("¿Cuánta cantidad desea vender?");
-                    lecturaCantidad=Read.dataInt();
+                    lecturaCantidad=Read.readInt();
                     //Se carga el producto y la cantidad solicitada por el usuario
                     gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
                     break;

@@ -17,17 +17,17 @@ public class Read {
 
     }
 
-    public static int dataInt() {
+    public static int readInt() {
         return Integer.parseInt(data());
     }
 
-    public static float datoFloat() {
+    public static float readFloat() {
         return Float.parseFloat(data());
     }
 
     // Leer un char por teclado
 
-    public static char dataChar() {
+    public static char readChar() {
         char c = ' ';
         try {
             java.io.BufferedInputStream b = new BufferedInputStream(System.in);
