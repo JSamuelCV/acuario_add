@@ -7,6 +7,16 @@ public class Main {
     static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.txt";;
 
     public static void main(String[] args) throws IOException {
+        static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.txt";;
+
+        public static void main(String[] args) {
+            System.out.println("----------------------------------------------------------\n"+
+                    "\t¡ATENCIÓN!: ESTO ES UNA PRE-ALFA.\n "+
+                    "\tNO representa la calidad final del producto.\n"+
+                    "----------------------------------------------------------\n\n\n"
+            );
+            comprobarArchivoSeresVivos();
+            testTienda();
         comprobarArchivoSeresVivos();
     }
 
