@@ -6,7 +6,8 @@ public class Main {
 
     static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.txt";;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        menuPrincipalEmpleados();
         comprobarArchivoSeresVivos();
     }
 
@@ -26,8 +27,7 @@ public class Main {
 
      */
     static void menuPrincipalEmpleados() throws IOException{
-        final String rutaEmpleados="C:\\ficheroEmpleados.txt";
-        File archivoEmpleados = new File (rutaEmpleados);
+        final String rutaEmpleados="C:\\Users\\Developer\\Documents\\carpetaFicheros\\empleados.txt";
         FileReader lector = new FileReader (rutaEmpleados);
         BufferedReader br = new BufferedReader(lector);
         Teclado entrada=new Teclado();
@@ -49,25 +49,33 @@ public class Main {
 
             switch (opcionMenuEmpleados){
                 case 0 -> fin=true;
-                case 1 -> lista(archivoEmpleados, br, lector);
+                case 1 -> lista(br);
                 case 2 -> cambiarDatosEmpleado(rutaEmpleados);
             }
         }while(!fin);
     }
 
-    static void lista(File archivoEmpleados, BufferedReader br, FileReader lector) throws IOException{
+    static void lista(BufferedReader br) throws IOException{
         int i;
-        String linea;
-        for(i=1;i<archivoEmpleados.length();i++){
+        String linea=" ";
+        // Este for recorre el fichero 'empleados' y en caso de que no sean nulos los imprime
+        // Cuando se encuentra una linea null se termina el for
+        for(i=1;linea!=null;i++){
             linea=br.readLine();
-            System.out.println();
-            System.out.println("Empleado "+i+" : "+linea);
-            System.out.println();
+
+            if(linea!=null){
+                System.out.println();
+                System.out.println("Empleado "+i+" : "+linea);
+                System.out.println();
+            }
         }
     }
 
     static void cambiarDatosEmpleado(String rutaEmpleados){
         System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleados);
+        System.out.println();
+        System.out.println("Los datos deben de ser introducidos siguiendo el siguiente patron:");
+        System.out.println("ID Nombre Apellidos DNI tipoTrabajo HorasTrabajo Sueldo Vacaciones");
     }
 
 
