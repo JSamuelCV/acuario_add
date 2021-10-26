@@ -1,8 +1,5 @@
 package com.jmirallesr;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
 public class SerVivo {
     private String id,especie,genero,fechaCompra,procedencia,comportamiento,estado,alimentacion,idSimbiosis,tratamiento,simbiosis;
 
@@ -17,50 +14,6 @@ public class SerVivo {
         this.estado=estado;
         this.alimentacion=alimentacion;
         this.simbiosis=simbiosis;
-    }
-
-    void mostrarDatos(){
-        System.out.println("---");
-        System.out.println("\tID: " + id + "\n" +
-                "\tEspecie: " + especie + "\n" +
-                "\tGenero: " + genero + "\n" +
-                "\tFecha de compra: " + fechaCompra +"\n" +
-                "\tProcedencia: " + procedencia + "\n" +
-                "\tComportamiento: " + comportamiento + "\n" +
-                "\tEstado: " + estado);
-        if(estado.equalsIgnoreCase("Enfermo")){
-            System.out.println("\tTratamiento: " + tratamiento);
-        }
-        System.out.println("\tAlimentacion: " + alimentacion + "\n" +
-                "\tSimbiosis: " + simbiosis);
-        if(simbiosis.equalsIgnoreCase("True")){
-            System.out.println("\tIDSimbiosis: " + idSimbiosis);
-        }
-        System.out.println("---");
-    }
-
-    int leerDatos(BufferedReader in){
-        int lineas = 9;
-        try {
-            this.id=in.readLine();
-            this.especie=in.readLine();
-            this.genero=in.readLine();
-            this.fechaCompra=in.readLine();
-            this.procedencia=in.readLine();
-            this.comportamiento=in.readLine();
-            this.estado=in.readLine();
-            if(estado.equalsIgnoreCase("Enfermo")){
-                this.tratamiento=in.readLine();
-                lineas++;
-            }
-            this.alimentacion=in.readLine();
-            this.simbiosis=in.readLine();
-            if(simbiosis.equalsIgnoreCase("True")){
-                this.idSimbiosis=in.readLine();
-                lineas++;
-            }
-        }catch(IOException ioe) {}
-        return lineas;
     }
 
     public String getId() {
