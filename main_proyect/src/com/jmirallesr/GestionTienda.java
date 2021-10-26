@@ -4,7 +4,7 @@ package com.jmirallesr;
 
 public class GestionTienda {
 
-    /* Atributes */
+    /* Attributes */
     private Producto productos[] = null;
     private double caja;
 
