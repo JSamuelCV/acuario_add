@@ -7,7 +7,6 @@ public class Main {
     static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.txt";;
 
     public static void main(String[] args) throws IOException {
-        menuPrincipalEmpleados();
         comprobarArchivoSeresVivos();
     }
 
