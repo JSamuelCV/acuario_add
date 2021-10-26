@@ -1,5 +1,8 @@
 package com.jmirallesr;
 
+import com.jmirallesr.productos.Comida;
+import com.jmirallesr.productos.Peluche;
+
 import java.io.*;
 
 public class Main {
@@ -7,13 +10,75 @@ public class Main {
     static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.txt";;
 
     public static void main(String[] args) {
+        System.out.println("----------------------------------------------------------\n"+
+                "\t¡ATENCIÓN!: ESTO ES UNA PRE-ALFA.\n "+
+                "\tNO representa la calidad final del producto.\n"+
+                "----------------------------------------------------------\n\n\n"
+        );
         comprobarArchivoSeresVivos();
+        testTienda_mpv();
     }
 
 
+    /** GESTIÓN DE LA TIENDA + PRODUCTOS */
 
+    static void testTienda_mpv() {
+        System.out.println("Bienvenido a la tienda del acuario:\n"+
+                "El programa simula la gestión de la tienda del acuario.\n"+
+                "Los artículos sólo se pueden vender si están disponibles en la tienda\n"+
+                "El usuario puede:\n"+
+                "\t Comprar productos de los existentes.\n"+
+                "\t Añadir nuevos productos a la cesta.\n"+
+                "\t Consultar el importe de la cuenta.");
 
+        boolean continuar=true;
+        int lecturaProducto, lecturaCantidad; //Variables para seleccionar el producto y la cantidad que se quiere comprar
 
+        //Se instancian y cargan los productos
+        Producto peluche1 = new Peluche("Pez Globo", 16.43, 10, true, "relleno");
+        Producto peluche2 = new Peluche("Tiburón", 9.99, 12, true, "rígido");
+        Producto chocolateBlanco = new Comida("Chocolate Edición Acuario", 4.55, 4, true, true);
+        Producto golosinaMedusa = new Comida("Medusa Golosa", 0.45, 200, true, true);
+
+        //Creamos el array "catálogo" para contener los productos. Su dimensión viene del número de veces que se instancia el constructor Producto
+        Producto catalogo[] = new Producto[Producto.dimensionArray];
+        //Se crea el objeto gestión para trabajar (mostrar y vender productos, y mostrar caja)
+        GestionTienda gestion = new GestionTienda();
+
+        catalogo[0] = peluche1;
+        catalogo[1] = peluche2;
+        catalogo[2] = chocolateBlanco;
+        catalogo[3] = golosinaMedusa;
+
+        do {
+            System.out.println("\n\nIntroduzca la opción que desea realizar:\n"
+                    +"1. Mostrar productos\n"
+                    +"2. Vender productos\n"
+                    +"3. Mostrar caja\n"
+                    +"SALIR --> Pulse cualquier otro número\n"
+            );
+            switch (Read.dataInt()) {
+                case 1:
+                    gestion.mostrarProductos(catalogo);
+                    break;
+                case 2:
+                    System.out.println("¿Que producto desea comprar?");
+                    gestion.mostrarNombreProductos(catalogo);
+                    lecturaProducto=Read.dataInt();
+                    System.out.println("¿Cuánta cantidad desea vender?");
+                    lecturaCantidad=Read.dataInt();
+                    //Se carga el producto y la cantidad solicitada por el usuario
+                    gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
+                    break;
+                case 3:
+                    System.out.println(gestion.mostrarCaja() +" €");
+                    break;
+                default:
+                    continuar=false;
+            }
+
+        } while(continuar);
+    }
 
     //Empleados
     /*
