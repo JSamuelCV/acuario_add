@@ -16,13 +16,13 @@ public class Main {
                 "----------------------------------------------------------\n\n\n"
         );
         comprobarArchivoSeresVivos();
-        testTienda_mpv();
+        testTienda();
     }
 
 
-    /** GESTIÓN DE LA TIENDA + PRODUCTOS */
+    /* INICIO GESTIÓN DE LA TIENDA + PRODUCTOS */
 
-    static void testTienda_mpv() {
+    static void testTienda() {
         System.out.println("Bienvenido a la tienda del acuario:\n"+
                 "El programa simula la gestión de la tienda del acuario.\n"+
                 "Los artículos sólo se pueden vender si están disponibles en la tienda\n"+
@@ -80,7 +80,12 @@ public class Main {
         } while(continuar);
     }
 
-    //Empleados
+    /* FINAL DE LA TIENDA */
+
+
+
+    /* INICIO EMPLEADOS */
+
     /*
         En el metodo main se pondra a disposicion del usuario un menu en el que se le
         daran las siguientes opciones:
@@ -135,10 +140,11 @@ public class Main {
         System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleados);
     }
 
+    /* FINAL EMPLEADOS */
 
 
+    /* INICIO SERVIVO */
 
-        //SerVivo
     static void menuPrincipalSerVivo() throws IOException {
         Teclado t = new Teclado();
         int op = 0;
@@ -342,5 +348,7 @@ public class Main {
             }
         }catch(IOException ioe) {}
     }
+
+    /* FINAL SERVIVO */
 }
 
