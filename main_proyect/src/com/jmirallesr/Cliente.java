@@ -164,24 +164,24 @@ public class Cliente {
         return (srelleno);
     }
     void escribirEnArchivo(RandomAccessFile f){
-        String saux;
+        String nombre,apellidos,dni,correo,nombreRes,horaEntrada,horaSalida;
         try{
             f.writeInt(numVisitante);
-            saux = construirNombreParaFich();
-            f.writeUTF(saux);
-            saux = construirApellidosParaFich();
-            f.writeUTF(saux);
-            saux = construirDNIParaFich();
-            f.writeUTF(saux);
-            saux = construirCorreoParaFich();
-            f.writeUTF(saux);
-            saux = construirNombreResponsableParaFich();
-            f.writeUTF(saux);
+            nombre = construirNombreParaFich();
+            f.writeUTF(nombre);
+            apellidos = construirApellidosParaFich();
+            f.writeUTF(apellidos);
+            dni = construirDNIParaFich();
+            f.writeUTF(dni);
+            correo = construirCorreoParaFich();
+            f.writeUTF(correo);
+            nombreRes = construirNombreResponsableParaFich();
+            f.writeUTF(nombreRes);
             f.writeInt(edad);
-            saux = construirHoraEntradaParaFich();
-            f.writeUTF(saux);
-            saux = construirHoraSalidaParaFich();
-            f.writeUTF(saux);
+            horaEntrada = construirHoraEntradaParaFich();
+            f.writeUTF(horaEntrada);
+            horaSalida = construirHoraSalidaParaFich();
+            f.writeUTF(horaSalida);
             f.writeInt(valoracion);
 
 
@@ -222,5 +222,7 @@ public class Cliente {
     void mostrarDatos(){
         System.out.println("Número de visitante: "+numVisitante+",Nombre: "+nombre+", Apellidos: "+apellidos+", DNI: "+dni+", Correo electrónico: "+correoElectronico+", Nombre de la persona responsable: "+nombreResponsable+", Edad:"+edad+", Hora de entrada al recinto: "+horaEntrada+", Hora de salida del recinto: "+horaSalida+", Valoracion: "+valoracion);
     }
-
+    void mostrarDatosValoracion(){
+        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre+" "+apellidos+" le dio una valoracion al acuario de " + valoracion + " sobre 5.");
+    }
 }

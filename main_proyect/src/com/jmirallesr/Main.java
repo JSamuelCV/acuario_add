@@ -214,7 +214,7 @@ public class Main {
 
     /* INICIO CLIENTES */
 
-    static void menuClientes(Teclado entrada)throws IOException {
+    static void menuClientes(Teclado t)throws IOException {
 
         int opcion;
         do{
@@ -231,45 +231,45 @@ public class Main {
             System.out.println("6: Salir");
             System.out.println();
 
-            System.out.println("Seleccione una opcion (5 para terminar) : ");
-            opcion=entrada.leerInt();
+            System.out.println("Seleccione una opcion (6 para terminar) : ");
+            opcion=t.leerInt();
         }while(opcion<1 || opcion>8);
-        switch(opcion){
-            case 7:
-                Altas();
-                break;
-            case 8:
-                Bajas();
-                break;
-            case 1:
-                entradaCliente();
-                break;
-            case 2:
-                salidaCliente();
-                break;
-            case 3:
-                valoracionCliente();
-                break;
-            case 4:
-                estadisticaCliente();
-                break;
+        do{
+            switch(opcion) {
 
-            case 5:
-                datosCliente();
-                break;
-            case 6:
-                System.out.print("Has elegido la opcion salir");
-                break;
-            default:
+                case 1:
+                    entradaCliente();
+                    break;
+                case 2:
+                    salidaCliente();
+                    break;
+                case 3:
+                    valoracionCliente();
+                    break;
+                case 4:
+                    estadisticaCliente();
+                    break;
 
-                break;
+                case 5:
+                    mostrarCliente();
+                    break;
+                case 6:
+                    System.out.print("Has elegido la opcion salir");
+                    break;
+                case 7:
+                    Altas();
+                    break;
+                case 8:
+                    Bajas();
+                    break;
+            }
         }while(opcion!=6);
     }
     static void Altas()throws IOException{
         Cliente cvacio = new Cliente(0,"", "", "", "","", 0, "", "",0), c = new Cliente();
         Teclado t=new Teclado();
-        String nombre, apellidos, dni, correoElectronico, nombreResponsable, horaEntrada, horaSalida;
-        int edad, valoracion, numVisitante;
+        String nombre="", apellidos="" ,dni="", correoElectronico="", nombreResponsable="", horaEntrada="", horaSalida="";
+        int edad =0, valoracion=0, numVisitante;
         char confirmar=' ';
         RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","rw");
         System.out.println("\n\tNuevo cliente\n\t=====\n");
@@ -319,7 +319,7 @@ public class Main {
                 do{
                     System.out.println("Introduce valoracion(1-5)");
                     valoracion=t.leerInt();
-                }while(edad == Integer.MIN_VALUE && valoracion <5 && valoracion >0);
+                }while(valoracion== Integer.MIN_VALUE && valoracion <5 && valoracion >0);
                 do {
                     System.out.print("\nConfirmar el alta(s/n)? ");
                     confirmar = Character.toLowerCase(t.leerChar());
@@ -336,10 +336,11 @@ public class Main {
 
             }
             do{
-                System.out.print("Teclear código (0 = Fin)......: ");
+                System.out.print("Teclear numVisitante (0 = Fin)......: ");
                 numVisitante=t.leerInt();
             }while(numVisitante == Integer.MIN_VALUE);
-        }fich.close();
+        }
+        fich.close();
 
 
     }
@@ -410,7 +411,7 @@ public class Main {
             System.out.println("El registro buscado no existe.)");
         fich.close();
     }
-    static void datosCliente() throws IOException{
+    static void mostrarCliente() throws IOException{
         Teclado t= new Teclado();
         Cliente c= new Cliente(0,"", "", "", "","", 0, "", "",0);
         int numVisitante;
@@ -427,11 +428,64 @@ public class Main {
             System.out.println("El registro buscado no existe.)");
         fich.close();
     }
-    static void valoracionCliente(){
+    static void valoracionCliente()throws IOException{
+        Teclado t= new Teclado();
+        int opcion;
+        do{
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("  Elige una opcion");
+            System.out.println();
+            System.out.println("1: Valoracion de un cliente determinado");
+            System.out.println("2: Media de las valoraciones");
+            System.out.println("3: Salir");
+            System.out.println();
+
+            System.out.println("Seleccione una opcion (3 para terminar) : ");
+            opcion=t.leerInt();
+        }while(opcion<1 || opcion>3);
+        do{
+            switch(opcion) {
+
+                case 1:
+                    valoracionIndividual();
+                    break;
+                case 2:
+                    valoracionTotal();
+                    break;
+                case 3:
+                    System.out.print("Has elegido la opcion salir");
+                    break;
+            }
+        }while(opcion!=3);
+    }
+    static void valoracionIndividual()throws IOException{
+        Teclado t= new Teclado();
+        Cliente c= new Cliente(0,"", "", "", "","", 0, "", "",0);
+        int numVisitante;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","rw");
+        do {
+            System.out.println("Teclee el numero de visitante de la persona a consultar: ");
+            numVisitante= t.leerInt();
+        }while(numVisitante==Integer.MIN_VALUE);
+        fich.seek(numVisitante * c.tamano());
+        c.leerDeArchivo(fich);
+        if(c.getNumVisitante()!=0)
+            c.mostrarDatosValoracion();
+        else
+            System.out.println("El registro buscado no existe.)");
+        fich.close();
+    }
+
+    static void valoracionTotal()throws IOException{
+
+        //Hacer una media de las valoraciones de todos los clientes
 
     }
-    static void estadisticaCliente(){
 
+    static void estadisticaCliente()throws IOException{
+        // Mostrar cuantos clientes vinieron en un dia
     }
 
     /* FINAL CLIENTES */
