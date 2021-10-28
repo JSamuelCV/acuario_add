@@ -9,7 +9,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 
 public class Main {
-
+    
+    static final String rutaEmpleado = System.getProperty("user.home") + "/Escritorio/Empleados.txt";
     static final String rutaCliente = System.getProperty("user.home") + "/Escritorio/Clientes.txt";
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
@@ -98,8 +99,7 @@ public class Main {
 
      */
     static void menuPrincipalEmpleados() throws IOException{
-        final String rutaEmpleados="C:\\Users\\Developer\\Documents\\carpetaFicheros\\empleados.txt";
-        FileReader lector = new FileReader (rutaEmpleados);
+        FileReader lector = new FileReader (rutaEmpleado);
         BufferedReader br = new BufferedReader(lector);
         Teclado entrada=new Teclado();
         boolean fin=false;
@@ -116,17 +116,17 @@ public class Main {
             do{
                 System.out.println("Seleccione una opcion (0 para terminar) : ");
                 opcionMenuEmpleados=entrada.leerInt();
-            }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>4);
+            }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>2);
 
             switch (opcionMenuEmpleados){
                 case 0 -> fin=true;
-                case 1 -> lista(br);
-                case 2 -> cambiarDatosEmpleado(rutaEmpleados);
+                case 1 -> listaEmpledos(br);
+                case 2 -> cambiarDatosEmpleado();
             }
         }while(!fin);
     }
 
-    static void lista(BufferedReader br) throws IOException{
+    static void listaEmpledos(BufferedReader br) throws IOException{
         int i;
         String linea=" ";
         // Este for recorre el fichero 'empleados' y en caso de que no sean nulos los imprime
@@ -142,8 +142,8 @@ public class Main {
         }
     }
 
-    static void cambiarDatosEmpleado(String rutaEmpleados){
-        System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleados);
+    static void cambiarDatosEmpleado(){
+        System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleado);
         System.out.println();
         System.out.println("Los datos deben de ser introducidos siguiendo el siguiente patron:");
         System.out.println("ID Nombre Apellidos DNI tipoTrabajo HorasTrabajo Sueldo Vacaciones");
