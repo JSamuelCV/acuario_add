@@ -1,35 +1,9 @@
+package com.jmirallesr;
 import java.io.*;
-/*
-clientes:
-   1- entrada:
-                registrodedatos(metodos)
-
-                    nombre
-                    apellidos
-                    Dni
-                    correo electronico
-                    nombre responsable(opcional)
-                    hora de entrada:
-
-    2- salida cliente:
-                    mostrarSalida(metodo)
-                        hora de salida
-                        horas que ha estado
-                        valoracion(0-5)
-    3- valoracion
-                    mostrarvaloracion()
-                        individual(todas)
-                        media
-    4-  estadistica
-                   mostrarEstadistica()
-                        Nº de gente en un dia
-
-
- */
 public class Cliente {
 
-    private String nombre,apellidos,dni,correoElectronico,nombreResponsable,horaEntrada,horaSalida,horasDentro;
-    private int edad,valoracion,numGente,numVisitante;
+    private String nombre,apellidos,dni,correoElectronico,nombreResponsable,horaEntrada,horaSalida;
+    private int edad,valoracion,numVisitante;
     final int LONGNOMBRE = 30;
     final int LONGAPELLIDOS = 50;
     final int LONGDNI = 9;
@@ -37,12 +11,11 @@ public class Cliente {
     final int LONGNOMBRERESPONSABLE=30;
     final int LONGHORAENTRADA=5;
     final int LONGHORASALIDA=5;
-    final int LONGHORASDENTRO=5;
 
 
 
     Cliente(){}
-    Cliente(int numVisitante,String nombre, String apellidos, String dni, String correoElectronico, String nombreResponsable, int edad, String horaEntrada, String horaSalida, String horasDentro, int valoracion, int numGente){
+    Cliente(int numVisitante,String nombre, String apellidos, String dni, String correoElectronico, String nombreResponsable, int edad, String horaEntrada, String horaSalida, int valoracion){
         this.numVisitante=numVisitante;
         this.nombre=nombre;
         this.apellidos=apellidos;
@@ -52,9 +25,8 @@ public class Cliente {
         this.edad=edad;
         this.horaEntrada=horaEntrada;
         this.horaSalida=horaSalida;
-        this.horasDentro=horasDentro;
         this.valoracion=valoracion;
-        this.numGente=numGente;
+
 
     }
     public int getNumVisitante(){
@@ -84,14 +56,9 @@ public class Cliente {
     public String gethoraSalida(){
         return this.horaSalida;
     }
-    public String gethorasDentro(){
-        return this.horasDentro;
-    }
+
     public int getvaloracion(){
         return this.valoracion;
-    }
-    public int getNumGente(){
-        return this.numGente;
     }
 
     void setnumVisitante(int numVisitante){
@@ -121,25 +88,17 @@ public class Cliente {
     void setHoraSalida(String horaSalida){
         this.horaSalida=horaSalida;
     }
-    void setHorasDentro(String horasDentro){
-        this.horasDentro=horasDentro;
-    }
+
     void setvaloracion(int valoracion){
         this.valoracion=valoracion;
     }
-    void setNumGente(int numGente){
-        this.numGente=numGente;
-    }
 
 
-    public static void main (String[]args)throws IOException {
-        Teclado entrada = new Teclado();
 
 
-    }
     int tamano(){
 
-        return(4+30+50+9+40+30+4+5+5+5+4+4);
+        return(4+2+30+2+50+2+9+2+40+2+30+4+2+5+2+5+4);
     }
     String construirNombreParaFich(){
         String saux;
@@ -197,14 +156,6 @@ public class Cliente {
         saux = horaSalida + blancos(longrelleno);
         return (saux);
     }
-    String construirHorasDentroParaFich(){
-        String saux;
-        int longrelleno;
-        horasDentro.trim();
-        longrelleno = LONGHORASDENTRO- horasDentro.length();
-        saux = horasDentro + blancos(longrelleno);
-        return (saux);
-    }
     String blancos(int numblancos){
         char[] relleno = new char[numblancos];
         for(int i=0;i<numblancos;i++)
@@ -217,7 +168,7 @@ public class Cliente {
         try{
             f.writeInt(numVisitante);
             saux = construirNombreParaFich();
-            f.writeUTF(saux); //escribir el string
+            f.writeUTF(saux);
             saux = construirApellidosParaFich();
             f.writeUTF(saux);
             saux = construirDNIParaFich();
@@ -231,10 +182,9 @@ public class Cliente {
             f.writeUTF(saux);
             saux = construirHoraSalidaParaFich();
             f.writeUTF(saux);
-            saux = construirHorasDentroParaFich();
-            f.writeUTF(saux);
             f.writeInt(valoracion);
-            f.writeInt(numGente);
+
+
 
         }catch(IOException e){
             System.out.println("Error: "+e);
@@ -252,9 +202,9 @@ public class Cliente {
             edad=f.readInt();
             horaEntrada=f.readUTF();
             horaSalida=f.readUTF();
-            horasDentro=f.readUTF();
+
             valoracion=f.readInt();
-            numGente=f.readInt();
+
 
         }catch(EOFException eofe){
             finArchivo=true;
@@ -263,7 +213,14 @@ public class Cliente {
         }
         return (finArchivo);
     }
-    void mostrarDatos(){
-        System.out.println(numVisitante+" - "+nombre+" - "+apellidos+" - "+dni+" - "+correoElectronico+" - "+nombreResponsable+" - "+edad+" - "+horaEntrada+" - "+horaSalida+" - "+horasDentro+" - "+valoracion+" - "+numGente);
+    void mostrarDatosEntrada(){
+        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre+" "+apellidos+" entró al acuario a las "+horaEntrada+" horas.");
     }
+    void mostrarDatosSalida(){
+        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre+" "+apellidos+" salió del acuario a las "+horaSalida+" horas.");
+    }
+    void mostrarDatos(){
+        System.out.println("Número de visitante: "+numVisitante+",Nombre: "+nombre+", Apellidos: "+apellidos+", DNI: "+dni+", Correo electrónico: "+correoElectronico+", Nombre de la persona responsable: "+nombreResponsable+", Edad:"+edad+", Hora de entrada al recinto: "+horaEntrada+", Hora de salida del recinto: "+horaSalida+", Valoracion: "+valoracion);
+    }
+
 }

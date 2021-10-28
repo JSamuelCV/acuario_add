@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
 
     static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.xml";
-
+    static final String rutaCliente = System.getProperty("user.home") + "/Escritorio/Clientes.txt";
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
         System.out.println("----------------------------------------------------------\n"+
                 "\t¡ATENCIÓN!: ESTO ES UNA PRE-ALFA.\n "+
@@ -391,5 +391,225 @@ public class Main {
     }
 
     /* FINAL SERVIVO */
-}
 
+    
+    static void menuClientes(Teclado entrada)throws IOException {
+
+        int opcion;
+        do{
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("MENU CLIENTES");
+            System.out.println();
+            System.out.println("1: Consultar datos entrada cliente");
+            System.out.println("2: Consultar datos salida cliente");
+            System.out.println("3: Consultar la valoracion de un cliente");
+            System.out.println("4: Estadistica");
+            System.out.println("5: Consultar info personal cliente");
+            System.out.println("6: Salir");
+            System.out.println();
+
+            System.out.println("Seleccione una opcion (5 para terminar) : ");
+            opcion=entrada.leerInt();
+        }while(opcion<1 || opcion>8);
+        switch(opcion){
+            case 7:
+                Altas();
+                break;
+            case 8:
+                Bajas();
+                break;
+            case 1:
+                entradaCliente();
+                break;
+            case 2:
+                salidaCliente();
+                break;
+            case 3:
+                valoracionCliente();
+                break;
+            case 4:
+                estadisticaCliente();
+                break;
+
+            case 5:
+                datosCliente();
+                break;
+            case 6:
+                System.out.print("Has elegido la opcion salir");
+                break;
+            default:
+
+                break;
+        }while(opcion!=6);
+    }
+    static void Altas()throws IOException{
+        Cliente cvacio = new Cliente(0,"", "", "", "","", 0, "", "",0), c = new Cliente();
+        Teclado t=new Teclado();
+        String nombre, apellidos, dni, correoElectronico, nombreResponsable, horaEntrada, horaSalida;
+        int edad, valoracion, numVisitante;
+        char confirmar=' ';
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","rw");
+        System.out.println("\n\tNuevo cliente\n\t=====\n");
+        do{
+            System.out.print("Teclear numVisitante (0 = Fin)......: ");
+            numVisitante=t.leerInt();
+        }while(numVisitante == Integer.MIN_VALUE);
+        while (numVisitante != 0) {
+            fich.seek(numVisitante*cvacio.tamano());
+            c.leerDeArchivo(fich);
+            if(c.getNumVisitante() !=0 && numVisitante*cvacio.tamano() <fich.length())
+                System.out.println("La persona ya estaba en la base de datos.");
+            else{
+                do{
+                    System.out.println("Introduce nombre ");
+                    nombre=t.leerString();
+                }while(nombre.length()>30);
+                do{
+                    System.out.println("Introduce apellidos ");
+                    apellidos=t.leerString();
+                }while(apellidos.length()>50);
+                do{
+                    System.out.println("Introduce DNI ");
+                    dni=t.leerString();
+                }while(dni.length()>9);
+                do{
+                    System.out.println("Introduce correo electronico ");
+                    correoElectronico=t.leerString();
+                }while(correoElectronico.length()>40);
+                do{
+                    System.out.println("Introduce nombre de la persona encargada ");
+                    nombreResponsable=t.leerString();
+                }while(nombreResponsable.length()>30);
+
+                do{
+                    System.out.println("Introduce edad ");
+                    edad=t.leerInt();
+                }while(edad == Integer.MIN_VALUE);
+                do{
+                    System.out.println("Introduce la hora de entrada ");
+                    horaEntrada=t.leerString();
+                }while(horaEntrada.length()!=5);
+                do{
+                    System.out.println("Introduce la hora de salida ");
+                    horaSalida=t.leerString();
+                }while(horaSalida.length()!=5);
+                do{
+                    System.out.println("Introduce valoracion(1-5)");
+                    valoracion=t.leerInt();
+                }while(edad == Integer.MIN_VALUE && valoracion <5 && valoracion >0);
+                do {
+                    System.out.print("\nConfirmar el alta(s/n)? ");
+                    confirmar = Character.toLowerCase(t.leerChar());
+                }while(confirmar != 's' && confirmar != 'n');
+                if(confirmar == 's') {
+                    c = new Cliente (numVisitante,nombre,apellidos,dni,correoElectronico,nombreResponsable,edad,horaEntrada,horaSalida,valoracion);
+                    if (numVisitante * c.tamano()>fich.length())
+                        fich.seek(fich.length());
+                    while(numVisitante*c.tamano()>fich.length())
+                        cvacio.escribirEnArchivo(fich);
+                    fich.seek(numVisitante * c.tamano());
+                    c.escribirEnArchivo(fich);
+                }
+
+            }
+            do{
+                System.out.print("Teclear código (0 = Fin)......: ");
+                numVisitante=t.leerInt();
+            }while(numVisitante == Integer.MIN_VALUE);
+        }fich.close();
+
+
+    }
+    static void Bajas()throws IOException{
+        Cliente c = new Cliente(0,"", "", "", "","", 0, "", "",0);
+        Teclado t = new Teclado();
+        int codigo;
+        String opcion;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","r");
+        System.out.println("\n\tBAJAS\n\t=====\n");
+        do{
+            System.out.print("Teclee el código a dar de baja...: ");
+            codigo = t.leerInt();
+        }while(codigo==Integer.MIN_VALUE);
+        fich.seek(codigo * c.tamano());
+        c.leerDeArchivo(fich);
+        if (c.getNumVisitante() != 0){
+            c.mostrarDatos();
+            System.out.println();
+            do{
+                System.out.print("\nConfirma la baja (s/n)? ");
+                opcion = t.leerString();
+            }while(!opcion.equalsIgnoreCase("s") && !opcion.equalsIgnoreCase("n"));
+            if (opcion.equalsIgnoreCase("s")){
+                c = new Cliente(0,"", "", "", "","", 0, "", "",0);
+                fich.seek(codigo * c.tamano());
+                c.escribirEnArchivo(fich);
+            }
+        }
+        else{
+            System.out.println("\nEl registro de dicha persona no existe.\n");
+        }
+        fich.close();
+    }
+
+    static void entradaCliente() throws IOException{
+        Teclado t= new Teclado();
+        Cliente c= new Cliente(0,"", "", "", "","", 0, "", "",0);
+        int numVisitante;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","rw");
+        do {
+            System.out.println("Teclee el numero de visitante de la persona a consultar: ");
+            numVisitante= t.leerInt();
+        }while(numVisitante==Integer.MIN_VALUE);
+        fich.seek(numVisitante * c.tamano());
+        c.leerDeArchivo(fich);
+        if(c.getNumVisitante()!=0)
+            c.mostrarDatosEntrada();
+        else
+            System.out.println("El registro buscado no existe.)");
+        fich.close();
+    }
+
+    static void salidaCliente() throws IOException{
+        Teclado t= new Teclado();
+        Cliente c = new Cliente(0,"", "", "", "","", 0, "", "",0);
+        int numVisitante;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","rw");
+        do {
+            System.out.println("Teclee el numero de visitante de la persona a consultar: ");
+            numVisitante= t.leerInt();
+        }while(numVisitante==Integer.MIN_VALUE);
+        fich.seek(numVisitante * c.tamano());
+        c.leerDeArchivo(fich);
+        if(c.getNumVisitante()!=0)
+            c.mostrarDatosSalida();
+        else
+            System.out.println("El registro buscado no existe.)");
+        fich.close();
+    }
+    static void datosCliente() throws IOException{
+        Teclado t= new Teclado();
+        Cliente c= new Cliente(0,"", "", "", "","", 0, "", "",0);
+        int numVisitante;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","rw");
+        do {
+            System.out.println("Teclee el numero de visitante de la persona a consultar: ");
+            numVisitante= t.leerInt();
+        }while(numVisitante==Integer.MIN_VALUE);
+        fich.seek(numVisitante * c.tamano());
+        c.leerDeArchivo(fich);
+        if(c.getNumVisitante()!=0)
+            c.mostrarDatos();
+        else
+            System.out.println("El registro buscado no existe.)");
+        fich.close();
+    }
+    static void valoracionCliente(){
+
+    }
+    static void estadisticaCliente(){
+
+    }
+}
