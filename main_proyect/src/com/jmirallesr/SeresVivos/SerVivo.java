@@ -16,6 +16,49 @@ public class SerVivo {
         this.simbiosis=simbiosis;
     }
 
+    public void mostrarDatos(){
+        if(id!=null){
+            System.out.println("Id: " + id);
+            if(especie!=null){
+                System.out.println("Especie: " + especie);
+            }
+            if(genero!=null){
+                if(genero.equalsIgnoreCase("Macho")||genero.equalsIgnoreCase("Hembra")||genero.equalsIgnoreCase("Hermafrodita")||genero.equalsIgnoreCase("Hermafrodita(Macho)")||genero.equalsIgnoreCase("Hermafrodita(Hembra)")) {
+                    System.out.println("Genero: " + genero);
+                }
+            }
+            if(fechaCompra!=null){
+                System.out.println("Fecha de compra: " + fechaCompra);
+            }
+            if(procedencia!=null){
+                System.out.println("Procedencia: " + procedencia);
+            }
+            if(comportamiento!=null){
+                System.out.println("Comportamiento: " + comportamiento);
+            }
+            if(alimentacion!=null){
+                System.out.println("Alimentacion: " + alimentacion);
+            }
+            if(estado!=null){
+                if(estado.equalsIgnoreCase("Normal")||estado.equalsIgnoreCase("Enfermo")||estado.equalsIgnoreCase("Gestacion")){
+                    System.out.println("Estado: " + estado);
+                    if(estado.equalsIgnoreCase("Enfermo")&&tratamiento!=null){
+                        System.out.println("Tratamiento: " + tratamiento);
+                    }
+                }
+            }
+            if(simbiosis!=null){
+                if(simbiosis.equalsIgnoreCase("True")||simbiosis.equalsIgnoreCase("False")){
+                    System.out.println("Simbiosis: " + simbiosis);
+                    if(simbiosis.equalsIgnoreCase("True")&&idSimbiosis!=null){
+                        System.out.println("Id Simbiosis: " + idSimbiosis);
+                    }
+                }
+            }
+            System.out.println("---------------------------------------------------------------------------------------------");
+        }
+    }
+
     public String getId() {
         return id;
     }

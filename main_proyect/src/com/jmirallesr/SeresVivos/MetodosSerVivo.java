@@ -12,8 +12,64 @@ public class MetodosSerVivo {
 
     static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.xml";
 
-    static void consultasSerVivo() {
-
+    public static void consultasSerVivo(int op, String valor) throws ParserConfigurationException, SAXException, IOException{
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser saxParser = factory.newSAXParser();
+        SerVivoHandler handler = new SerVivoHandler();
+        saxParser.parse(rutaSeresVivos, handler);
+        List<SerVivo> list = handler.getSeres();
+        System.out.println("---------------------------------------------------------------------------------------------");
+        switch (op) {
+            case 1:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getId().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+            case 2:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getEspecie().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+            case 3:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getGenero().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+            case 4:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getFechaCompra().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+            case 5:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getProcedencia().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+            case 6:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getEstado().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+            case 7:
+                for (SerVivo serVivo : list) {
+                    if (serVivo.getAlimentacion().equalsIgnoreCase(valor)){
+                        serVivo.mostrarDatos();
+                    }
+                }
+                break;
+        }
     }
 
     public static void listadosSerVivo() throws ParserConfigurationException, SAXException, IOException{
@@ -24,46 +80,7 @@ public class MetodosSerVivo {
         List<SerVivo> list = handler.getSeres();
         System.out.println("---------------------------------------------------------------------------------------------");
         for (SerVivo serVivo : list) {
-            if(serVivo.getId()!=null){
-                System.out.println("Id: " + serVivo.getId());
-                if(serVivo.getEspecie()!=null){
-                    System.out.println("Especie: " + serVivo.getEspecie());
-                }
-                if(serVivo.getGenero()!=null){
-                    if(serVivo.getEstado().equalsIgnoreCase("Macho")||serVivo.getEstado().equalsIgnoreCase("Hembra")||serVivo.getEstado().equalsIgnoreCase("Hermafrodita")||serVivo.getEstado().equalsIgnoreCase("Hermafrodita(Macho)")||serVivo.getEstado().equalsIgnoreCase("Hermafrodita(Hembra)")) {
-                        System.out.println("Genero: " + serVivo.getGenero());
-                    }
-                }
-                if(serVivo.getFechaCompra()!=null){
-                    System.out.println("Fecha de compra: " + serVivo.getFechaCompra());
-                }
-                if(serVivo.getProcedencia()!=null){
-                    System.out.println("Procedencia: " + serVivo.getProcedencia());
-                }
-                if(serVivo.getComportamiento()!=null){
-                    System.out.println("Comportamiento: " + serVivo.getComportamiento());
-                }
-                if(serVivo.getAlimentacion()!=null){
-                    System.out.println("Alimentacion: " + serVivo.getAlimentacion());
-                }
-                if(serVivo.getEstado()!=null){
-                    if(serVivo.getEstado().equalsIgnoreCase("Normal")||serVivo.getEstado().equalsIgnoreCase("Enfermo")||serVivo.getEstado().equalsIgnoreCase("Gestacion")){
-                        System.out.println("Estado: " + serVivo.getEstado());
-                        if(serVivo.getEstado().equalsIgnoreCase("Enfermo")&&serVivo.getTratamiento()!=null){
-                            System.out.println("Tratamiento: " + serVivo.getTratamiento());
-                        }
-                    }
-                }
-                if(serVivo.getSimbiosis()!=null){
-                    if(serVivo.getSimbiosis().equalsIgnoreCase("True")||serVivo.getSimbiosis().equalsIgnoreCase("False")){
-                        System.out.println("Simbiosis: " + serVivo.getSimbiosis());
-                        if(serVivo.getSimbiosis().equalsIgnoreCase("True")&&serVivo.getIdSimbiosis()!=null){
-                            System.out.println("Id Simbiosis: " + serVivo.getIdSimbiosis());
-                        }
-                    }
-                }
-                System.out.println("---------------------------------------------------------------------------------------------");
-            }
+            serVivo.mostrarDatos();
         }
     }
 

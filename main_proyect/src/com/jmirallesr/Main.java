@@ -12,7 +12,7 @@ public class Main {
 
     static final String rutaCliente = System.getProperty("user.home") + "/Escritorio/Clientes.txt";
 
-    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         System.out.println("----------------------------------------------------------\n"+
                 "\t¡ATENCIÓN!: ESTO ES UNA PRE-ALFA.\n "+
                 "\tNO representa la calidad final del producto.\n"+
@@ -206,7 +206,7 @@ public class Main {
         }else{
             System.out.print("\tTeclee valor a buscar ? ");
             valor = t.leerString();
-            //consultasSerVivo()
+            MetodosSerVivo.consultasSerVivo(op,valor);
         }
     }
 
