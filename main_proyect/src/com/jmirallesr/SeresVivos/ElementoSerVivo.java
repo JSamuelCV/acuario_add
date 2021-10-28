@@ -1,4 +1,4 @@
-package com.jmirallesr;
+package com.jmirallesr.SeresVivos;
 
 public enum ElementoSerVivo {
     SER_VIVO("ser_vivo"),ID("id"),ESPECIE("especie"),GENERO("genero"),FECHA_COMPRA("fecha_compra"),

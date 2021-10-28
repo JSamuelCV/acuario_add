@@ -1,4 +1,4 @@
-package com.jmirallesr;
+package com.jmirallesr.SeresVivos;
 
 public class SerVivo {
     private String id,especie,genero,fechaCompra,procedencia,comportamiento,estado,alimentacion,idSimbiosis,tratamiento,simbiosis;

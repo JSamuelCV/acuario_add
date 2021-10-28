@@ -1,4 +1,4 @@
-package com.jmirallesr;
+package com.jmirallesr.SeresVivos;
 
 import java.util.ArrayList;
 import java.util.List;
