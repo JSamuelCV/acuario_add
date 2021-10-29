@@ -100,96 +100,7 @@ public class Cliente {
 
         return(4+2+30+2+50+2+9+2+40+2+30+4+2+5+2+5+4);
     }
-    String construirNombreParaFich(){
-        String saux;
-        int longrelleno;
-        nombre.trim();
-        longrelleno = LONGNOMBRE- nombre.length();
-        saux = nombre + blancos(longrelleno);
-        return (saux);
-    }
-    String construirApellidosParaFich(){
-        String saux;
-        int longrelleno;
-        apellidos.trim();
-        longrelleno = LONGAPELLIDOS- apellidos.length();
-        saux = apellidos + blancos(longrelleno);
-        return (saux);
-    }
-    String construirDNIParaFich(){
-        String saux;
-        int longrelleno;
-        dni.trim();
-        longrelleno = LONGDNI- dni.length();
-        saux = dni + blancos(longrelleno);
-        return (saux);
-    }
-    String construirCorreoParaFich(){
-        String saux;
-        int longrelleno;
-        dni.trim();
-        longrelleno = LONGDNI- dni.length();
-        saux = dni + blancos(longrelleno);
-        return (saux);
-    }
-    String construirNombreResponsableParaFich(){
-        String saux;
-        int longrelleno;
-        nombreResponsable.trim();
-        longrelleno = LONGNOMBRERESPONSABLE- nombreResponsable.length();
-        saux = nombreResponsable + blancos(longrelleno);
-        return (saux);
-    }
-    String construirHoraEntradaParaFich(){
-        String saux;
-        int longrelleno;
-        horaEntrada.trim();
-        longrelleno = LONGHORAENTRADA- horaEntrada.length();
-        saux = horaEntrada + blancos(longrelleno);
-        return (saux);
-    }
-    String construirHoraSalidaParaFich(){
-        String saux;
-        int longrelleno;
-        horaSalida.trim();
-        longrelleno = LONGHORASALIDA- horaSalida.length();
-        saux = horaSalida + blancos(longrelleno);
-        return (saux);
-    }
-    String blancos(int numblancos){
-        char[] relleno = new char[numblancos];
-        for(int i=0;i<numblancos;i++)
-            relleno[i] = ' ';
-        String srelleno = new String(relleno);
-        return (srelleno);
-    }
-    void escribirEnArchivo(RandomAccessFile f){
-        String nombre,apellidos,dni,correo,nombreRes,horaEntrada,horaSalida;
-        try{
-            f.writeInt(numVisitante);
-            nombre = construirNombreParaFich();
-            f.writeUTF(nombre);
-            apellidos = construirApellidosParaFich();
-            f.writeUTF(apellidos);
-            dni = construirDNIParaFich();
-            f.writeUTF(dni);
-            correo = construirCorreoParaFich();
-            f.writeUTF(correo);
-            nombreRes = construirNombreResponsableParaFich();
-            f.writeUTF(nombreRes);
-            f.writeInt(edad);
-            horaEntrada = construirHoraEntradaParaFich();
-            f.writeUTF(horaEntrada);
-            horaSalida = construirHoraSalidaParaFich();
-            f.writeUTF(horaSalida);
-            f.writeInt(valoracion);
 
-
-
-        }catch(IOException e){
-            System.out.println("Error: "+e);
-        }
-    }
     boolean leerDeArchivo(RandomAccessFile f){
         boolean finArchivo = false;
         try{
@@ -214,15 +125,15 @@ public class Cliente {
         return (finArchivo);
     }
     void mostrarDatosEntrada(){
-        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre+" "+apellidos+" entró al acuario a las "+horaEntrada+" horas.");
+        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" entró al acuario a las "+horaEntrada.trim()+" horas.");
     }
     void mostrarDatosSalida(){
-        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre+" "+apellidos+" salió del acuario a las "+horaSalida+" horas.");
+        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" salió del acuario a las "+horaSalida.trim()+" horas.");
     }
     void mostrarDatos(){
-        System.out.println("Número de visitante: "+numVisitante+",Nombre: "+nombre+", Apellidos: "+apellidos+", DNI: "+dni+", Correo electrónico: "+correoElectronico+", Nombre de la persona responsable: "+nombreResponsable+", Edad:"+edad+", Hora de entrada al recinto: "+horaEntrada+", Hora de salida del recinto: "+horaSalida+", Valoracion: "+valoracion);
+        System.out.println("Número de visitante: "+numVisitante+", Nombre: "+nombre.trim()+", Apellidos: "+apellidos.trim()+", DNI: "+dni.trim()+", Correo electrónico: "+correoElectronico.trim()+", Nombre de la persona responsable: "+nombreResponsable.trim()+", Edad:"+edad+", Hora de entrada al recinto: "+horaEntrada.trim()+", Hora de salida del recinto: "+horaSalida.trim()+", Valoracion: "+valoracion);
     }
     void mostrarDatosValoracion(){
-        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre+" "+apellidos+" le dio una valoracion al acuario de " + valoracion + " sobre 5.");
+        System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" le dio una valoracion al acuario de " + valoracion + " sobre 5.");
     }
 }
