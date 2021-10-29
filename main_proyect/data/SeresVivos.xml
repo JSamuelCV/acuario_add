@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<seres_vivos>
+	<ser_vivo>
+		<id>a001</id>
+		<especie>Amphiprion akallopisos</especie>
+		<genero>Macho</genero>
+		<fecha_compra>13/06/2009</fecha_compra>
+		<procedencia>tumundomarino.com</procedencia>
+		<comportamiento>Tranquilo</comportamiento>
+		<alimentacion>ARTEMIA ADULTA ENRIQUECIDA 10</alimentacion>
+		<estado>Enfermo</estado>
+		<tratamiento>Cobre 5ml</tratamiento>
+		<simbiosis>True</simbiosis>
+		<id_simbiosis>a002</id_simbiosis>
+	</ser_vivo>
+	<ser_vivo>
+		<id>a002</id>
+		<especie>Amphiprion akallopisos</especie>
+		<genero>Hembra</genero>
+		<fecha_compra>13/06/2009</fecha_compra>
+		<procedencia>tumundomarino.com</procedencia>
+		<comportamiento>Agresiva cuando se invade su territorio</comportamiento>
+		<alimentacion>ARTEMIA ADULTA ENRIQUECIDA 10</alimentacion>
+		<estado>Gestacion</estado>
+		<simbiosis>True</simbiosis>
+		<id_simbiosis>a001</id_simbiosis>
+	</ser_vivo>
+	<ser_vivo>
+		<id>a003</id>
+		<especie>Amphiprion akallopisos</especie>
+		<genero>Macho</genero>
+		<fecha_compra>13/06/2009</fecha_compra>
+		<procedencia>tumundomarino.com</procedencia>
+		<comportamiento>Tranquilo</comportamiento>
+		<alimentacion>ARTEMIA ADULTA ENRIQUECIDA 10</alimentacion>
+		<estado>Normal</estado>
+		<simbiosis>False</simbiosis>
+	</ser_vivo>
+</seres_vivos>

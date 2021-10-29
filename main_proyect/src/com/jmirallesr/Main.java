@@ -11,19 +11,39 @@ import java.io.*;
 public class Main {
 
 
-    static final String rutaCliente ="C:\\Users\\quiqu\\Desktop\\clientes.dat";
+    static final String rutaCliente ="data\\clientes.dat";
+    static final String rutaEmpleados = "data\\Empleados.txt";
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-        Teclado t = new Teclado();
         System.out.println("----------------------------------------------------------\n"+
                 "\t¡ATENCIÓN!: ESTO ES UNA PRE-ALFA.\n "+
                 "\tNO representa la calidad final del producto.\n"+
                 "----------------------------------------------------------\n\n\n"
         );
         MetodosSerVivo.comprobarArchivoSeresVivos();
-        menuClientes(t);
+        mainTestMenu();
     }
 
+    static void mainTestMenu() throws IOException, ParserConfigurationException, SAXException {
+        Teclado t = new Teclado();
+        boolean continuar=true;
+        do {
+            System.out.println("\n\nIntroduzca la opción que desea testear:\n"
+                    +"1. Gestión de la tienda\n"
+                    +"2. Clientes\n"
+                    +"3. Empleados\n"
+                    +"4. SeresVivos\n"
+                    +"5. SALIR\n"
+            );
+            switch (Read.readInt()) {
+                case 1 -> testTienda();
+                case 2 -> menuClientes(t);
+                case 3 -> menuPrincipalEmpleados();
+                case 4 -> menuPrincipalSerVivo();
+                case 5 -> continuar = false;
+            }
+        } while(continuar);
+    }
 
     /* INICIO GESTIÓN DE LA TIENDA + PRODUCTOS */
 
@@ -46,7 +66,7 @@ public class Main {
         Producto golosinaMedusa = new Comida("Medusa Golosa", 0.45, 200, true, true);
 
         //Creamos el array "catálogo" para contener los productos. Su dimensión viene del número de veces que se instancia el constructor Producto
-        Producto catalogo[] = new Producto[Producto.dimensionArray];
+        Producto[] catalogo = new Producto[Producto.dimensionArray];
         //Se crea el objeto gestión para trabajar (mostrar y vender productos, y mostrar caja)
         GestionTienda gestion = new GestionTienda();
 
@@ -63,23 +83,18 @@ public class Main {
                     +"SALIR --> Pulse cualquier otro número\n"
             );
             switch (Read.readInt()) {
-                case 1:
-                    gestion.mostrarProductos(catalogo);
-                    break;
-                case 2:
+                case 1 -> gestion.mostrarProductos(catalogo);
+                case 2 -> {
                     System.out.println("¿Que producto desea comprar?");
                     gestion.mostrarNombreProductos(catalogo);
-                    lecturaProducto=Read.readInt();
+                    lecturaProducto = Read.readInt();
                     System.out.println("¿Cuánta cantidad desea vender?");
-                    lecturaCantidad=Read.readInt();
+                    lecturaCantidad = Read.readInt();
                     //Se carga el producto y la cantidad solicitada por el usuario
                     gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
-                    break;
-                case 3:
-                    System.out.println(gestion.mostrarCaja() +" €");
-                    break;
-                default:
-                    continuar=false;
+                }
+                case 3 -> System.out.println(gestion.mostrarCaja() + " €");
+                default -> continuar = false;
             }
 
         } while(continuar);
@@ -101,8 +116,7 @@ public class Main {
 
      */
     static void menuPrincipalEmpleados() throws IOException{
-        final String rutaEmpleado = "C:\\Users\\Developer\\Documents\\ficheros\\Empleados.txt";
-        FileReader lector = new FileReader (rutaEmpleado);
+        FileReader lector = new FileReader (rutaEmpleados);
         BufferedReader br = new BufferedReader(lector);
         Teclado entrada=new Teclado();
         boolean fin=false;
@@ -124,7 +138,7 @@ public class Main {
             switch (opcionMenuEmpleados){
                 case 0 -> fin=true;
                 case 1 -> listaEmpledos(br);
-                case 2 -> cambiarDatosEmpleado(rutaEmpleado);
+                case 2 -> cambiarDatosEmpleado(rutaEmpleados);
             }
         }while(!fin);
     }
@@ -145,8 +159,8 @@ public class Main {
         }
     }
 
-    static void cambiarDatosEmpleado(String rutaEmpleado){
-        System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleado);
+    static void cambiarDatosEmpleado(String rutaEmpleados){
+        System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleados);
         System.out.println();
         System.out.println("Los datos deben de ser introducidos siguiendo el siguiente patron:");
         System.out.println("ID Nombre Apellidos DNI tipoTrabajo HorasTrabajo Sueldo Vacaciones");

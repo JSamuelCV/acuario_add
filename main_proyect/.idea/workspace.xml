@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1065b8fc-7e17-4ebb-84b7-8b8686d02a5e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main_proyect/com/jmirallesr/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main_proyect/com/jmirallesr/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main_proyect/com/jmirallesr/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main_proyect/com/jmirallesr/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/jmirallesr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jmirallesr/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jmirallesr/SeresVivos/MetodosSerVivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jmirallesr/SeresVivos/MetodosSerVivo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,11 +100,18 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GitHub\acuario_add\main_proyect\data" />
+      <recent name="D:\GitHub\acuario_add\main_proyect\src" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+    <configuration name="Main" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.jmirallesr.Main" />
       <module name="main_proyect" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -135,5 +145,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

@@ -10,7 +10,8 @@ import java.util.List;
 
 public class MetodosSerVivo {
 
-    static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.xml";
+    //static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.xml";
+    static final String rutaSeresVivos = "data/SeresVivos.xml";
 
     public static void consultasSerVivo(int op, String valor) throws ParserConfigurationException, SAXException, IOException{
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -86,7 +87,7 @@ public class MetodosSerVivo {
 
     public static void infoAltasSerVivo(){
         System.out.println("Para realizar altas,bajas o modificaciones de algun ser vivo," +
-                "debes acceder al archivo (" + System.getProperty("user.home") + "\\Desktop\\SeresVivos.xml)");
+                "debes acceder al archivo \"data\\SeresVivos.xml\" en la carpeta principal del proyecto.");
         System.out.println(" ");
         System.out.println("Debes seguir la siguiente estructura dentro del archivo para cada ser vivo:\n" +
                 "\t<ser_vivo>\n" +
