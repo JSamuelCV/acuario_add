@@ -10,7 +10,7 @@ import java.io.*;
 
 public class Main {
     
-    static final String rutaEmpleado = System.getProperty("user.home") + "/Escritorio/Empleados.txt";
+
     static final String rutaCliente = System.getProperty("user.home") + "/Escritorio/Clientes.txt";
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
@@ -99,6 +99,7 @@ public class Main {
 
      */
     static void menuPrincipalEmpleados() throws IOException{
+        final String rutaEmpleado = "C:\\Users\\Developer\\Documents\\ficheros\\Empleados.txt";
         FileReader lector = new FileReader (rutaEmpleado);
         BufferedReader br = new BufferedReader(lector);
         Teclado entrada=new Teclado();
@@ -121,7 +122,7 @@ public class Main {
             switch (opcionMenuEmpleados){
                 case 0 -> fin=true;
                 case 1 -> listaEmpledos(br);
-                case 2 -> cambiarDatosEmpleado();
+                case 2 -> cambiarDatosEmpleado(rutaEmpleado);
             }
         }while(!fin);
     }
@@ -142,7 +143,7 @@ public class Main {
         }
     }
 
-    static void cambiarDatosEmpleado(){
+    static void cambiarDatosEmpleado(String rutaEmpleado){
         System.out.println("Si desea cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleado);
         System.out.println();
         System.out.println("Los datos deben de ser introducidos siguiendo el siguiente patron:");
