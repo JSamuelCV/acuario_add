@@ -247,7 +247,7 @@ public class Main {
                     valoracionCliente();
                     break;
                 case 4:
-                    estadisticaCliente();
+                    estadisticaClienteJavi();
                     break;
 
                 case 5:
@@ -486,6 +486,21 @@ public class Main {
 
     static void estadisticaCliente()throws IOException{
         // Mostrar cuantos clientes vinieron en un dia
+    }
+
+    static void estadisticaClienteJavi() throws IOException {
+        int i=0, totalValoracion=0;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente+" clientes.dat","r");
+        do {
+            i++;
+            Cliente c = new Cliente (0,"", "", "", "","", 0, "", "",0);
+            fich.seek(i * c.tamano());
+            if(c.leerDeArchivo(fich)) {
+                break;
+            }
+            totalValoracion += c.getvaloracion();
+        } while(true);
+        System.out.println("Media de valoraciones: "+(totalValoracion/i));
     }
 
     /* FINAL CLIENTES */
