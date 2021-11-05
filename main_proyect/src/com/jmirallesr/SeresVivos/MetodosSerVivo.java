@@ -11,7 +11,7 @@ import java.util.List;
 public class MetodosSerVivo {
 
     //static final String rutaSeresVivos = System.getProperty("user.home") + "/Desktop/SeresVivos.xml";
-    static final String rutaSeresVivos = "data/SeresVivos.xml";
+    static final String rutaSeresVivos = "main_proyect\\data\\SeresVivos.xml";
 
     public static void consultasSerVivo(int op, String valor) throws ParserConfigurationException, SAXException, IOException{
         SAXParserFactory factory = SAXParserFactory.newInstance();

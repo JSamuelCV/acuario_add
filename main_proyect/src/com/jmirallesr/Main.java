@@ -11,8 +11,8 @@ import java.io.*;
 public class Main {
 
 
-    static final String rutaCliente ="data\\clientes.dat";
-    static final String rutaEmpleados = "data\\Empleados.txt";
+    static final String rutaCliente ="main_proyect\\data\\clientes.dat";
+    static final String rutaEmpleados = "main_proyect\\data\\Empleados.txt";
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         System.out.println("----------------------------------------------------------\n"+
@@ -65,9 +65,9 @@ public class Main {
         Producto chocolateBlanco = new Comida("Chocolate Edición Acuario", 4.55, 4, true, true);
         Producto golosinaMedusa = new Comida("Medusa Golosa", 0.45, 200, true, true);
 
-        //Creamos el array "catálogo" para contener los productos. Su dimensión viene del número de veces que se instancia el constructor Producto
+        //Creamos el array "catálogo" para contener los productos. Su dimensión viene del número de veces que se instancia el constructor Producto.
         Producto[] catalogo = new Producto[Producto.dimensionArray];
-        //Se crea el objeto gestión para trabajar (mostrar y vender productos, y mostrar caja)
+        //Se crea el objeto gestión para trabajar (mostrar, vender productos, y mostrar caja)
         GestionTienda gestion = new GestionTienda();
 
         catalogo[0] = peluche1;
